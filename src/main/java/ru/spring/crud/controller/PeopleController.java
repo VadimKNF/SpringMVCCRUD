@@ -31,7 +31,7 @@ public class PeopleController {
     }
 
     @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model) {
+    public String show(@PathVariable("id") int id, Model model) throws SQLException {
 
         model.addAttribute("person", personDAO.show(id));
 
@@ -56,7 +56,7 @@ public class PeopleController {
     }
 
     @GetMapping("/{id}/edit")
-    public String edit(Model model, @PathVariable("id") int id) {
+    public String edit(Model model, @PathVariable("id") int id) throws SQLException {
         model.addAttribute("person", personDAO.show(id));
         return "people/edit";
     }
