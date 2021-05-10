@@ -9,6 +9,7 @@ import ru.spring.crud.dao.PersonDAO;
 import ru.spring.crud.models.Person;
 
 import javax.validation.Valid;
+import java.sql.SQLException;
 
 @Controller
 @RequestMapping("/people")
@@ -22,7 +23,7 @@ public class PeopleController {
     }
 
     @GetMapping()
-    public String index(Model model) {
+    public String index(Model model) throws SQLException {
 
         model.addAttribute("people", personDAO.index());
 
@@ -44,7 +45,7 @@ public class PeopleController {
 
     @PostMapping()
     public String create(@ModelAttribute("person") @Valid Person person,
-                         BindingResult bindingResult) {
+                         BindingResult bindingResult) throws SQLException {
 
         if (bindingResult.hasErrors()){
             return "people/new";
